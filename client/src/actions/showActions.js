@@ -80,8 +80,9 @@ export const getShows = () => (dispatch) => {
 
 export const editShow = (show) => (dispatch) => {
   dispatch(clearErrors);
+  console.log("Show", show);
   axios
-    .put(`${BASE_URL}/show/${show.id}/?cinema=${show.cinema}&movie=${show.movie}&showDay=${show.showDay}&showTime=${show.showTime}`)
+    .post(`${BASE_URL}/show/${show.id}`,show)
     .then((res) => {
       if (res.data.success) {
         successMessage("Show updated Successfully");

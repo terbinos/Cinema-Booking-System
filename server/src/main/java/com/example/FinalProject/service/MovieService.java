@@ -83,7 +83,7 @@ public class MovieService {
             }else{
                 movie.setImageUrl(movie.getImageUrl());
             }
-
+            movieRepository.save(movie);
             return new Response(true, "Movie updated successfully!");
         }
 

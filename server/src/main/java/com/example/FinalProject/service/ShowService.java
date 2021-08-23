@@ -31,7 +31,7 @@ public class ShowService {
                 cinema.getNumberOfSeats(),
                 showRequest.getShowDay(),
                 showRequest.getShowTime());
-        boolean isTaken = checkShowAvailability(cinema, showRequest.getShowDay(), showRequest.getShowTime());
+        boolean isTaken = checkShowAvailability(0,cinema, showRequest.getShowDay(), showRequest.getShowTime());
 
         if(isTaken){
             return new Response(false, "Show time already taken on this cinema!");
@@ -54,13 +54,13 @@ public class ShowService {
         return null;
     }
 
-    public boolean checkShowAvailability(Cinema cinema, String showDay, String showTime) {
+    public boolean checkShowAvailability(int showId,Cinema cinema, String showDay, String showTime) {
         List<Show> shows = showRepository.findAll();
         boolean isTaken = false;
         for (Show sh : shows) {
             if (sh.getCinema().equals(cinema) &&
                     sh.getShowDay().equals(showDay) &&
-                    sh.getShowTime().equals(showTime)) {
+                    sh.getShowTime().equals(showTime) && showId != sh.getId()) {
                 isTaken = true;
                 break;
             }
@@ -90,14 +90,15 @@ public class ShowService {
         // Process cinema input
         Cinema cin = processCinemaInput(cinema);
         // Check if showtime with that specific cinema already exists before updating
-        isTaken = checkShowAvailability(cin, showDay, showTime);
+        isTaken = checkShowAvailability(showId, cin, showDay, showTime);
         if(isTaken){
             return new Response(false, "Show time already taken on this cinema!");
         }else{
             if(cin != null && !Objects.equals(show.getCinema(), cin)){
+
                 show.setCinema(cin);
             }
-            if(movie != null && !Objects.equals(show.getMovie(), movie)){
+            if(movie != null && !show.getMovie().getId().equals(movie.getId())){
                 show.setMovie(movie);
             }
             if(showDay != null && !Objects.equals(show.getShowDay(), showDay)){
@@ -106,7 +107,7 @@ public class ShowService {
             if(showTime != null && !Objects.equals(show.getShowTime(), showTime)){
                 show.setShowTime(showTime);
             }
-
+            showRepository.save(show);
             return new Response(true, "Show updated successfully!");
         }
     }

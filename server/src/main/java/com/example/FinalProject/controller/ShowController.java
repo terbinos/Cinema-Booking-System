@@ -42,15 +42,11 @@ public class ShowController {
     }
 
     // Update show by id
-    @PutMapping(path = "{showId}")
+    @PostMapping(path = "/{showId}")
     public String updateShow(
-            @PathVariable("showId") Integer showId,
-            @RequestParam(required = false) String cinema,
-            @RequestParam(required = false) Movie movie,
-            @RequestParam(required = false) String showDay,
-            @RequestParam(required = false) String showTime) throws JsonProcessingException {
+            @PathVariable("showId") Integer showId,@RequestBody ShowRequest showRequest) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        Response response = showService.editShow(showId, cinema, movie, showDay, showTime);
+        Response response = showService.editShow(showId, showRequest.getCinema(), showRequest.getMovie(), showRequest.getShowDay(), showRequest.getShowTime());
         return mapper.writeValueAsString(response);
     }
 

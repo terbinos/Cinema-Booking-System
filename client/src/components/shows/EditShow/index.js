@@ -33,9 +33,6 @@ const EditShow = (props) => {
   const [flag, setFlag] = useState(false);
   const { movies, selectedEditableShow, changeStatus } = props;
 
-  
-  console.log("Got the movies", movies);
-  console.log("Got the selected show", selectedEditableShow);
   const showDays = [
     "Sunday",
     "Monday",
@@ -65,6 +62,12 @@ const EditShow = (props) => {
       description: errorText,
     });
   };
+
+  const getCinmaName = (cinemaName) => {
+    if(cinemaName === 'CINEMA_ONE') return "Cinema One"
+    if(cinemaName === 'CINEMA_TWO') return "Cinema Two"
+    if(cinemaName === 'CINEMA_THREE') return "Cinema Three"
+  }
 
   const getMovie = (id) => {
     let m = null;
@@ -114,7 +117,7 @@ const EditShow = (props) => {
                 onFinish={onSubmit}
                 initialValues={{
                   movie: selectedEditableShow.movie.id,
-                  cinema: selectedEditableShow.cinema,
+                  cinema: getCinmaName(selectedEditableShow.cinema),
                   showDay: selectedEditableShow.showDay,
                   showTime: selectedEditableShow.showTime,
                 }}
@@ -253,7 +256,7 @@ const EditShow = (props) => {
                     htmlType="submit"
                     style={{ width: 200 }}
                   >
-                    Add
+                    Update
                   </Button>
                 </Form.Item>
               </Form>

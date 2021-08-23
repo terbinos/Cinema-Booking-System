@@ -11,7 +11,7 @@ import {
   Popconfirm,
   Tooltip,
   Badge,
-  Button
+  // Button
 } from "antd";
 import {
   EditOutlined,
@@ -162,8 +162,8 @@ const ListShows = (props) => {
                     </Text>
                     <br/>
                     <Text type="secondary">{show.movie.description}</Text>
-                    <Divider/>
-                    <Row style={{ marginTop: 10 }}>
+                    {/* <Divider/> */}
+                    {/* <Row style={{ marginTop: 10 }}>
                       <Col span={12}>
                         <Button
                           type="primary"
@@ -196,7 +196,7 @@ const ListShows = (props) => {
                           </Button>
                         </Popconfirm>
                       </Col>
-                    </Row>
+                    </Row> */}
                     <Row>
                     
                     </Row>

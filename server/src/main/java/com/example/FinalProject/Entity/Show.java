@@ -1,9 +1,7 @@
 package com.example.FinalProject.Entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,6 +9,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 @Entity
 @Table(name = "SHOW_TBL")
 public class Show {

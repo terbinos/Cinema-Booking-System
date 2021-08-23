@@ -69,7 +69,7 @@ class Navbar extends Component {
           }}
           level={5}
         >
-          <Avatar style={{ backgroundColor: '#1a53ff', marginRight:5 }}>{user.sub.charAt(0)}</Avatar>
+          <Avatar style={{ backgroundColor: '#1a53ff', marginRight:5 }}>{user.sub && user.sub.charAt(0)}</Avatar>
           {user.sub}
         </Title>
       </Menu>
